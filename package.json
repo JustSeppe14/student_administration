@@ -1,7 +1,9 @@
 {
     "private": true,
+    "type": "module",
     "scripts": {
         "dev": "vite",
+        "watch": "vite --open",
         "build": "vite build"
     },
     "devDependencies": {
