@@ -2,22 +2,25 @@
 
 namespace App\Models;
 
-use App\Livewire\Course;
+
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class programmes extends Model
+class programme extends Model
 {
     use HasFactory;
     public function courses()
     {
-        return $this->hasMany(courses::class);
+        return $this->hasMany(course::class);
     }
     public function students()
     {
-        return $this->hasMany(students::class);
+        return $this->hasMany(student::class);
     }
+
+
+
     protected function name(): Attribute
     {
         return Attribute::make(

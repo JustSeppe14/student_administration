@@ -1,6 +1,6 @@
 <?php
 
-use App\Livewire\Course;
+use App\Livewire\Courses;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::view('/','home')->name('home');
-//Route::view('courses','courses')->name('courses');
-Route::get('courses', Course::class)->name('courses');
+//Route::view('course','course')->name('course');
+Route::get('course', Courses::class)->name('course');
 
 
 Route::middleware([

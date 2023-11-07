@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class student_courses extends Model
+class studentCourses extends Model
 {
     use HasFactory;
 
     public function studentCourse()
     {
-        return $this->belongsTo(students::class)->withDefault();
+        return $this->belongsTo(student::class)->withDefault();
     }
     public function courses()
     {
-        return $this->belongsTo(courses::class)->withDefault();
+        return $this->belongsTo(course::class)->withDefault();
     }
 }

@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class students extends Model
+class student extends Model
 {
     use HasFactory;
 
     public function student_courses()
     {
-        return $this->hasMany(student_courses::class);
+        return $this->hasMany(studentCourses::class);
     }
 }
