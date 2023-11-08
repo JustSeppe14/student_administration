@@ -9,7 +9,7 @@ class studentCourses extends Model
 {
     use HasFactory;
 
-    public function studentCourse()
+    public function student()
     {
         return $this->belongsTo(student::class)->withDefault();
     }
