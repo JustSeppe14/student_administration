@@ -26,19 +26,17 @@ class course extends Model
         );
     }
 
-//    protected function countStudents(): Attribute
+//    protected function studentName(): Attribute
 //    {
 //        return Attribute::make(
-//            get: fn($value,$attributes)=>studentCourses::find($attributes['student_id']),
+//            get: fn($value,$attributes)=> studentCourses::find($attributes['student_id'])->name,
 //        );
 //    }
 
-    protected function studentName(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value,$attributes)=> studentCourses::find($attributes['student_course_id'])->name,
-        );
-    }
 
-    protected $appends = ['programme_name','student_name'];
+
+
+
+
+    protected $appends = ['programme_name'];
 }
