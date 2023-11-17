@@ -1,3 +1,4 @@
+@php use App\Models\programme; @endphp
 
 <div>
     {{-- show preloader while fetching data in the background --}}
@@ -85,9 +86,10 @@
     {{-- No records found --}}
     @if($courses->isEmpty())
         <x-tmk.alert type="danger" class="w-full">
-            Can't find any course with <b>'{{ $name }}'</b> in the <b>'{{}}'</b> programme.
+            Can't find any course with <b>'{{ $name }}'</b> in the <b>'{{$programme}}'</b> programme.
         </x-tmk.alert>
     @endif
+
     {{-- Detail section --}}
     <x-dialog-modal wire:model="showModal">
         <x-slot name="title"><h1>{{$selectedRecord->programme_name ?? ''}}</h1></x-slot>

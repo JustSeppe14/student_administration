@@ -1,11 +1,11 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<x-studentadministration-layout>
+    <x-slot name="description">register</x-slot>
+    <x-slot name="title">Register</x-slot>
 
-        <x-validation-errors class="mb-4" />
-
+    <x-tmk.section class="grid grid-cols-1 max-w-md m-auto">
+        {{-- show validation errors --}}
+        <x-validation-errors class="mb-4"/>
+        {{-- register form --}}
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
@@ -56,5 +56,5 @@
                 </x-button>
             </div>
         </form>
-    </x-authentication-card>
-</x-guest-layout>
+    </x-tmk.section>
+</x-studentadministration-layout>

@@ -14,19 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::view("/",'home')->name('home');
 
-Route::view('/','home')->name('home');
-//Route::view('course','course')->name('course');
-Route::get('course', Courses::class)->name('course');
+Route::middleware(['auth','active'])->prefix('admin')->name('admin.')->group(function (){
+    Route::redirect('/','admin/course');
+    Route::get('course', Courses::class)->name('course');
+});
+
+
+Route::view('under-construction','under-construction')->name('under-construction');
 
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'active',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
