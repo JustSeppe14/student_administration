@@ -26,17 +26,26 @@ class course extends Model
         );
     }
 
-//    protected function studentName(): Attribute
-//    {
-//        return Attribute::make(
-//            get: fn($value,$attributes)=> studentCourses::find($attributes['student_id'])->name,
-//        );
-//    }
+    protected function studentId(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value, $attributes)=> studentCourses::where('course_id','like',$this['id'])->get()
+        );
+    }
+
+    protected function studentName(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value, $attributes)=> student::where('programme_id','like',$this['id'])->get('first_name','last_name')
+        );
+    }
 
 
 
 
 
 
-    protected $appends = ['programme_name'];
+
+
+    protected $appends = ['programme_name','student_id','student_name'];
 }

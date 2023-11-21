@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use App\Models\course;
 use App\Models\programme;
+use App\Models\student_courses;
+use App\Models\studentCourses;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -21,7 +23,7 @@ class Courses extends Component
 
 
     public $loading = 'Loading courses...';
-    public $selectedRecord;
+    public $selectedCourse;
     public $showModal = false;
 
     public function updated($property, $value)
@@ -32,9 +34,11 @@ class Courses extends Component
             $this->resetPage();
     }
 
-    public function showTracks(Course $course)
+    public function showCourses(Course $course)
     {
-        $this->selectedRecord = $course;
+        $this->selectedCourse = $course;
+        $students = student_courses::where('course_id','like',$course['id'])->with('student')->get();
+        $this->selectedCourse['student'] = $students;
         $this->showModal = true;
     }
 

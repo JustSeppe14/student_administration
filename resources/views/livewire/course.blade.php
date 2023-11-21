@@ -68,11 +68,15 @@
 
                     <div class="flex justify-between border-t border-gray-300 px-4 py-2">
                         <div class="flex w-full justify-center">
-
-                            <button class="w-full text-white bg-green-500 rounded-lg h-10" wire:click="showTracks({{ $course->id }})">
-                                <p>Manage students</p>
-                            </button>
-
+                            @if(count($course->student_id)>0)
+                                <button class="w-full text-white bg-green-500 rounded-lg h-10" wire:click="showCourses({{ $course->id }})">
+                                    <p>Manage students</p>
+                                </button>
+                            @else
+                                <button class="w-full text-white bg-green-200 rounded-lg h-10" wire:click="showCourses({{ $course->id }})" disabled>
+                                    <p>Manage students</p>
+                                </button>
+                            @endif
                         </div>
                     </div>
 
@@ -92,10 +96,29 @@
 
     {{-- Detail section --}}
     <x-dialog-modal wire:model="showModal">
-        <x-slot name="title"><h1>{{$selectedRecord->programme_name ?? ''}}</h1></x-slot>
-        <x-slot name="content"><p class="pb-4">{{$selectedRecord->name ?? ''}}</p>
-            <hr>
-        <p>{{$selectedRecord->student_name ?? ''}}</p></x-slot>
+        <x-slot name="title">
+            <div class="border-b border-gray-300 pb-2 gap-4">
+                <h1 class="font-bold text-3xl mb-3">
+                    {{ $selectedCourse->name ?? '' }}
+                </h1>
+                <p class="text-sm mb-3">{{ $selectedCourse->description ?? '' }}</p>
+            </div>
+        </x-slot>
+        <x-slot name="content">
+            @isset($selectedCourse->students)
+                <table class="w-full text-left align-top">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    @foreach($selectedCourse['students'] as $student)
+                        <tr class="">
+                            <td class="px-4 py-2">{{ $student->students->first_name ?? ''}} {{  $student->students->last_name }} (semester {{ $student->semester }})</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @endisset
+        </x-slot>
         <x-slot name="footer"></x-slot>
     </x-dialog-modal>
 </div>
