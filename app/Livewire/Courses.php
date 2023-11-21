@@ -24,6 +24,7 @@ class Courses extends Component
 
     public $loading = 'Loading courses...';
     public $selectedCourse;
+    public $selectedProgramme;
     public $showModal = false;
 
     public function updated($property, $value)
@@ -34,13 +35,14 @@ class Courses extends Component
             $this->resetPage();
     }
 
-    public function showCourses(Course $course)
+    public function showCourses(course $course)
     {
         $this->selectedCourse = $course;
-        $students = student_courses::where('course_id','like',$course['id'])->with('student')->get();
+        $students = studentcourses::where('course_id','like',$course['id'])->with('student')->get();
         $this->selectedCourse['student'] = $students;
         $this->showModal = true;
     }
+
 
     #[Layout('layouts.studentadministration',['title'=>'Courses','discription'=>'Welcome to our Student administration application'])]
     public function render()
@@ -56,7 +58,7 @@ class Courses extends Component
                 ['programme_id','like',$this->programme]
             ])
             ->with('programme')
-            ->with('student_courses')
+            ->with('studentcourses')
             ->paginate($this->perPage);
 
 

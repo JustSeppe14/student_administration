@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class course extends Model
 {
     use HasFactory;
-    public function student_courses()
+    public function studentcourses()
     {
         return $this->hasMany(studentCourses::class);
     }

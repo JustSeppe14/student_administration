@@ -90,7 +90,7 @@
     {{-- No records found --}}
     @if($courses->isEmpty())
         <x-tmk.alert type="danger" class="w-full">
-            Can't find any course with <b>'{{ $name }}'</b> in the <b>'{{$programme}}'</b> programme.
+            Can't find any course with <b>'{{ $name }}'</b> in the <b>'{{$programme->name ??''}}'</b> programme.
         </x-tmk.alert>
     @endif
 
@@ -112,7 +112,7 @@
                     <tbody>
                     @foreach($selectedCourse['students'] as $student)
                         <tr class="">
-                            <td class="px-4 py-2">{{ $student->students->first_name ?? ''}} {{  $student->students->last_name }} (semester {{ $student->semester }})</td>
+                            <td class="px-4 py-2">{{ $student->student->first_name ?? ''}} {{  $student->student->last_name }} (semester {{ $student->semester }})</td>
                         </tr>
                     @endforeach
                     </tbody>
