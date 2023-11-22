@@ -20,8 +20,10 @@
         <h1 class="text-3xl mb-4">
             {{$title ?? 'Student  Administration Application'}}
         </h1>
+        <p>{{$logo}}</p>
         {{-- Main content --}}
         {{ $slot }}
+
     </main>
     <x-layout.footer/>
 </div>

@@ -49,8 +49,12 @@
 <x-studentadministration-layout>
     <x-slot name="description">login</x-slot>
     <x-slot name="title">Login</x-slot>
-
+    <x-slot name="logo">
+        <x-authentication-card-logo />
+    </x-slot>
     <x-tmk.section class="grid grid-cols-1 max-w-md m-auto">
+        {{-- logo --}}
+
         {{-- show validation errors --}}
         <x-validation-errors class="mb-4"/>
         {{-- login form --}}
