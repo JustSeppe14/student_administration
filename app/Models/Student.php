@@ -12,14 +12,7 @@ class student extends Model
 
     public function student_courses()
     {
-        return $this->hasMany(studentCourses::class);
+        return $this->hasMany(StudentCourses::class);
     }
 
-    protected function name(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value)=>ucfirst($value),
-            set: fn($value)=>strtolower($value),
-        );
-    }
 }

@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\course;
 use App\Models\programme;
 use App\Models\student_courses;
-use App\Models\studentCourses;
+use App\Models\StudentCourses;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -38,7 +38,7 @@ class Courses extends Component
     public function showCourses(course $course)
     {
         $this->selectedCourse = $course;
-        $students = studentcourses::where('course_id','like',$course['id'])->with('student')->get();
+        $students = StudentCourses::where('course_id','like',$course->id)->with('student')->get();
         $this->selectedCourse['student'] = $students;
         $this->showModal = true;
     }
@@ -58,7 +58,7 @@ class Courses extends Component
                 ['programme_id','like',$this->programme]
             ])
             ->with('programme')
-            ->with('studentcourses')
+            ->with('student_courses')
             ->paginate($this->perPage);
 
 

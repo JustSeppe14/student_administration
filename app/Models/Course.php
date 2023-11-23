@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class course extends Model
 {
     use HasFactory;
-    public function studentcourses()
+    public function student_courses()
     {
-        return $this->hasMany(studentCourses::class);
+        return $this->hasMany(StudentCourses::class);
     }
     public function programme()
     {
@@ -29,14 +29,14 @@ class course extends Model
     protected function studentId(): Attribute
     {
         return Attribute::make(
-            get: fn($value, $attributes)=> studentCourses::where('course_id','like',$this['id'])->get()
+            get: fn($value, $attributes)=> StudentCourses::where('course_id','like',$this['id'])->get()
         );
     }
 
     protected function studentName(): Attribute
     {
         return Attribute::make(
-            get: fn($value, $attributes)=> student::where('programme_id','like',$this['id'])->get('first_name','last_name')
+            get: fn($value, $attributes)=> StudentCourses::where('course_id','like',$attributes['id'])->with('student')->get()
         );
     }
 
