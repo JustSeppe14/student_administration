@@ -1,7 +1,10 @@
 <x-studentadministration-layout>
     <x-slot name="description">register</x-slot>
     <x-slot name="title">Register</x-slot>
-
+    {{-- logo --}}
+    <x-slot name="logo">
+        <x-authentication-card-logo />
+    </x-slot>
     <x-tmk.section class="grid grid-cols-1 max-w-md m-auto">
         {{-- show validation errors --}}
         <x-validation-errors class="mb-4"/>

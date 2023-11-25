@@ -20,7 +20,8 @@
         <h1 class="text-3xl mb-4">
             {{$title ?? 'Student  Administration Application'}}
         </h1>
-        <p>{{$logo??''}}</p>
+        {{-- Logo --}}
+        {{$logo??''}}
         {{-- Main content --}}
         {{ $slot }}
 

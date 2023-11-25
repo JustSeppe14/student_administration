@@ -1,3 +1,3 @@
-<a href="/">
-    <x-tmk.logo class="w-full"/>
-</a>
+<p class="pb-5">
+    <x-tmk.logo/>
+</p>
