@@ -11,7 +11,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 
-class Courses extends Component
+class CoursesOverview extends Component
 {
     use WithPagination;
 
@@ -44,7 +44,7 @@ class Courses extends Component
     }
 
 
-    #[Layout('layouts.studentadministration',['title'=>'Courses','discription'=>'Welcome to our Student administration application'])]
+    #[Layout('layouts.studentadministration',['title'=>'CoursesOverview','discription'=>'Welcome to our Student administration application'])]
     public function render()
     {
         $allProgrammes = programme::has('courses')->withCount('courses')->get();

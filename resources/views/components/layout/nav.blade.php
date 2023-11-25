@@ -1,17 +1,28 @@
+@php use App\Models\programme;use App\Models\programmes; @endphp
 <nav class="container mx-auto p-4 flex justify-between items-center">
     <div class="flex items-center space-x-2">
         <x-nav-link href="{{route('home')}}" :active="request()->routeIs('home')">Home</x-nav-link>
-        <x-nav-link href="{{route('admin.course')}}" :active="request()->routeIs('admin.course')">Courses</x-nav-link>
+        @if(auth()->user())
+            <x-nav-link href="{{route('admin.course')}}" :active="request()->routeIs('admin.course')">Courses
+            </x-nav-link>
+        @elseif(auth()->user()->admin)
+            <x-nav-link href="{{route('admin.programme')}}" :active="request()->routeIs('admin.programme')">Courses
+            </x-nav-link>
+        @else
+            <x-nav-link href="{{route('course')}}" :active="request()->routeIs('course')">Courses</x-nav-link>
+        @endif
+
+
     </div>
     {{-- right navigation --}}
     <div class="relative flex items-center space-x-2">
 
-            <x-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
-                Login
-            </x-nav-link>
-            <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
-                Register
-            </x-nav-link>
+        <x-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+            Login
+        </x-nav-link>
+        <x-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+            Register
+        </x-nav-link>
         {{-- dropdown navigation--}}
         @auth
             <x-dropdown align="right" width="48">
@@ -29,7 +40,10 @@
                     <div class="border-t border-gray-100"></div>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition">Logout</button>
+                        <button type="submit"
+                                class="block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition">
+                            Logout
+                        </button>
                     </form>
                     <div class="border-t border-gray-100"></div>
                     @if(auth()->user()->admin)
