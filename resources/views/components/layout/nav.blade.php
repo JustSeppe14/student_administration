@@ -5,9 +5,10 @@
         @if(auth()->user())
             <x-nav-link href="{{route('admin.course')}}" :active="request()->routeIs('admin.course')">Courses
             </x-nav-link>
-
-            <x-nav-link href="{{route('admin.programme')}}" :active="request()->routeIs('admin.programme')">Courses
+            @if(auth()->user()->admin)
+            <x-nav-link href="{{route('admin.programme')}}" :active="request()->routeIs('admin.programme')">Programme
             </x-nav-link>
+            @endif
         @else
             <x-nav-link href="{{route('course')}}" :active="request()->routeIs('course')">Courses</x-nav-link>
         @endif
@@ -16,7 +17,6 @@
     </div>
     {{-- right navigation --}}
     <div class="relative flex items-center space-x-2">
-
         <x-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
             Login
         </x-nav-link>

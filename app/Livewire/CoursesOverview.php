@@ -39,9 +39,8 @@ class CoursesOverview extends Component
     public function showCourses(course $course)
     {
         $this->selectedCourse = $course;
-        $students = StudentCourses::where('course_id','like',$course->id)->with('student')->get($this->name);
+        $students = StudentCourses::where('course_id','like',$course->id)->with('student')->get();
         dump($students->toArray());
-
         $this->selectedCourse['student'] = $students;
         $this->showModal = true;
     }

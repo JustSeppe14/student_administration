@@ -105,11 +105,11 @@
             @isset($selectedCourse->students)
                 <table class="w-full text-left align-top">
                     <thead>
-                    </thead>
+                    </thead>s
                     <tbody>
                     @foreach($selectedCourse['students'] as $student)
-                        <tr class="">
-                            <td class="px-4 py-2">{{ $student->student->first_name ?? ''}} {{  $student->student->last_name }} (semester {{ $student->semester }})</td>
+                        <tr>
+                            <td>{{ $student->student->first_name}} {{  $student->student->last_name }} (semester {{ $student->semester }})</td>
                         </tr>
                     @endforeach
                     </tbody>
