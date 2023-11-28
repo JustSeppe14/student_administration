@@ -9,7 +9,8 @@ use Storage;
 class NavBar extends Component
 {
     public $avatar;
-    #[On('refresh-navigation-menu')]
+
+    #[On('refresh-navigation-menu')]  // refresh the NavBar component when the 'refresh-navigation-menu' event is emitted
     public function render()
     {
         if (auth()->user()) {
