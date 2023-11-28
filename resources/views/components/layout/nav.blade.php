@@ -5,7 +5,7 @@
         @if(auth()->user())
             <x-nav-link href="{{route('admin.course')}}" :active="request()->routeIs('admin.course')">Courses
             </x-nav-link>
-        @elseif(auth()->user()->admin)
+
             <x-nav-link href="{{route('admin.programme')}}" :active="request()->routeIs('admin.programme')">Courses
             </x-nav-link>
         @else

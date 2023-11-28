@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\course;
 use App\Models\programme;
+use App\Models\student;
 use App\Models\student_courses;
 use App\Models\StudentCourses;
 use Livewire\Attributes\Layout;
@@ -38,7 +39,9 @@ class CoursesOverview extends Component
     public function showCourses(course $course)
     {
         $this->selectedCourse = $course;
-        $students = StudentCourses::where('course_id','like',$course->id)->with('student')->get();
+        $students = StudentCourses::where('course_id','like',$course->id)->with('student')->get($this->name);
+        dump($students->toArray());
+
         $this->selectedCourse['student'] = $students;
         $this->showModal = true;
     }
