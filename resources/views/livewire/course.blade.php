@@ -102,12 +102,13 @@
             </div>
         </x-slot>
         <x-slot name="content">
-            @isset($selectedCourse->students)
+            {{-- @dump($selectedCourse['student_name'] ?? '')--}}
+            @isset($selectedCourse['student_name'])
                 <table class="w-full text-left align-top">
                     <thead>
-                    </thead>s
+                    </thead>
                     <tbody>
-                    @foreach($selectedCourse['students'] as $student)
+                    @foreach($selectedCourse['student_name'] as $student)
                         <tr>
                             <td>{{ $student->student->first_name}} {{  $student->student->last_name }} (semester {{ $student->semester }})</td>
                         </tr>

@@ -40,8 +40,9 @@ class CoursesOverview extends Component
     {
         $this->selectedCourse = $course;
         $students = StudentCourses::where('course_id','like',$course->id)->with('student')->get();
-        dump($students->toArray());
+        //dump($students->toArray());
         $this->selectedCourse['student'] = $students;
+        //dump($this->selectedCourse->toArray());
         $this->showModal = true;
     }
 
