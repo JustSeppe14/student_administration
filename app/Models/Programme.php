@@ -7,16 +7,17 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class programme extends Model
+class Programme extends Model
 {
     use HasFactory;
+    protected $fillable = ['name'];
     public function courses()
     {
-        return $this->hasMany(course::class);
+        return $this->hasMany(Course::class);
     }
     public function students()
     {
-        return $this->hasMany(student::class);
+        return $this->hasMany(Student::class);
     }
 
 

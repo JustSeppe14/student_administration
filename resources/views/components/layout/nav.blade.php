@@ -1,4 +1,4 @@
-@php use App\Models\programme;use App\Models\programmes; @endphp
+@php use App\Models\Programme;use App\Models\programmes; @endphp
 <nav class="container mx-auto p-4 flex justify-between items-center">
     <div class="flex items-center space-x-2">
         <x-nav-link href="{{route('home')}}" :active="request()->routeIs('home')">Home</x-nav-link>
@@ -6,8 +6,9 @@
             <x-nav-link href="{{route('admin.course')}}" :active="request()->routeIs('admin.course')">Courses
             </x-nav-link>
             @if(auth()->user()->admin)
-            <x-nav-link href="{{route('admin.programme')}}" :active="request()->routeIs('admin.programme')">Programme
-            </x-nav-link>
+                <x-nav-link href="{{route('admin.programme')}}" :active="request()->routeIs('admin.programme')">
+                    Programme
+                </x-nav-link>
             @endif
         @else
             <x-nav-link href="{{route('course')}}" :active="request()->routeIs('course')">Courses</x-nav-link>

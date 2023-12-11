@@ -99,6 +99,7 @@ return array(
     'Cron\\' => array($vendorDir . '/dragonmantank/cron-expression/src/Cron'),
     'Codeat3\\BladeSimpleIcons\\' => array($vendorDir . '/codeat3/blade-simple-icons/src'),
     'Codeat3\\BladePhosphorIcons\\' => array($vendorDir . '/codeat3/blade-phosphor-icons/src'),
+    'Carbon\\Doctrine\\' => array($vendorDir . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'BladeUI\\Icons\\' => array($vendorDir . '/blade-ui-kit/blade-icons/src'),

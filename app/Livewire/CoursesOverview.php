@@ -2,10 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Models\course;
-use App\Models\programme;
-use App\Models\student;
-use App\Models\student_courses;
+use App\Models\Course;
+use App\Models\Programme;
+use App\Models\Student;
 use App\Models\StudentCourses;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -36,7 +35,7 @@ class CoursesOverview extends Component
             $this->resetPage();
     }
 
-    public function showCourses(course $course)
+    public function showCourses(Course $course)
     {
         $this->selectedCourse = $course;
         $students = StudentCourses::where('course_id','like',$course->id)->with('student')->get();
@@ -50,7 +49,7 @@ class CoursesOverview extends Component
     #[Layout('layouts.studentadministration',['title'=>'CoursesOverview','discription'=>'Welcome to our Student administration application'])]
     public function render()
     {
-        $allProgrammes = programme::has('courses')->withCount('courses')->get();
+        $allProgrammes = Programme::has('courses')->withCount('courses')->get();
         $courses = Course::orderBy('name')
             ->where([
                 ['name','like',"%{$this->name}%"],

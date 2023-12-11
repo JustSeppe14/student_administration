@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('programme', function (Blueprint $table) {
+        Schema::create('programmes', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->timestamps();
 
         });
 
-        DB::table('programme')->insert(
+        DB::table('programmes')->insert(
             [
                 [
                     'name' => 'IT Factory'
@@ -44,6 +44,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('programme');
+        Schema::dropIfExists('programmes');
     }
 };

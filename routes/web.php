@@ -1,7 +1,8 @@
 <?php
 
+use App\Livewire\Admin\Programmes;
 use App\Livewire\CoursesOverview;
-use App\Models\programme;
+use App\Models\Programme;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view("/",'home')->name('home');
-Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function (){
-    Route::redirect('/','/programme');
-    Route::get('programme', CoursesOverview::class)->name('programme');
-});
-Route::middleware(['auth','active'])->prefix('admin')->name('admin.')->group(function (){
+
+Route::middleware(['auth','active','admin'])->prefix('admin')->name('admin.')->group(function (){
     Route::redirect('/','admin/course');
+    Route::get('programmes',Programmes::class)->name('programmes');
     Route::get('course', CoursesOverview::class)->name('course');
 });
 

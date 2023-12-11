@@ -13,11 +13,11 @@ class StudentCourses extends Model
 
     public function student()
     {
-        return $this->belongsTo(student::class)->withDefault();
+        return $this->belongsTo(Student::class)->withDefault();
     }
     public function courses()
     {
-        return $this->belongsTo(course::class)->withDefault();
+        return $this->belongsTo(Course::class)->withDefault();
     }
 
 }

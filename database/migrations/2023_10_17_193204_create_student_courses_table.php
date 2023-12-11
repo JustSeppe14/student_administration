@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('studentCourses', function (Blueprint $table) {
+        Schema::create('student_courses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('course_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::table('studentCourses')->insert(
+        DB::table('student_courses')->insert(
             [
                 [
                     'course_id' => 1,
@@ -45,6 +45,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('studentCourses');
+        Schema::dropIfExists('student_courses');
     }
 };

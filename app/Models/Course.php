@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class course extends Model
+class Course extends Model
 {
     use HasFactory;
     public function student_courses()
@@ -22,7 +22,7 @@ class course extends Model
     protected function programmeName(): Attribute
     {
         return Attribute::make(
-            get: fn($value,$attributes)=> programme::find($attributes['programme_id'])->name,
+            get: fn($value,$attributes)=> Programme::find($attributes['programme_id'])->name,
         );
     }
 
@@ -39,12 +39,6 @@ class course extends Model
             get: fn($value, $attributes)=> StudentCourses::where('course_id','like',$attributes['id'])->with('student')->get()
         );
     }
-
-
-
-
-
-
 
 
     protected $appends = ['programme_name','student_id','student_name'];
