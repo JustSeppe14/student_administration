@@ -8,6 +8,7 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Forms\CourseForm;
 
 class Programmes extends Component
 {
@@ -16,6 +17,25 @@ class Programmes extends Component
     //sort properties
     public $orderBy = 'name';
     public $orderAsc = true;
+
+    public $showModal = false;
+    public CourseForm $form;
+
+    public function newCourse()
+    {
+        $this->form->reset();
+        $this->resetErrorBag();
+        $this->showModal = true;
+    }
+    public function createCourse()
+    {
+        $this->form->create();
+        $this->showModal = false;
+        $this->dispatch('swal:toast', [
+            'background'=>'success',
+            'html'=>"The course <b><i>{$this->form->name}</i></b> has been added",
+        ]);
+    }
 
     public function updated($property, $value)
     {
@@ -110,7 +130,8 @@ class Programmes extends Component
         $programmes = programme::withCount('courses')
             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
             -> paginate($this->perPage);
-        return view('livewire.admin.programmes',compact('programmes'));
+        $programme = Programme::orderBy('name')->get();
+        return view('livewire.admin.programmes',compact('programmes','programme'));
     }
     public function resort($column)
     {

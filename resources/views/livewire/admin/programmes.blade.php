@@ -140,6 +140,9 @@
                                 <x-phosphor-pencil-line-duotone
                                     wire:click="edit({{$programme->id}})"
                                     class="w-5 text-gray-300 hover:text-green-600"/>
+                                <x-phosphor-book
+                                    wire:click="newCourse()"
+                                    class="w-5 text-gray-300 hover:text-gray-600"/>
                                 <x-phosphor-trash-duotone
                                     @click="$dispatch('swal:confirm', {
                                         title: 'Delete {{ $programme->name }}?',
@@ -167,4 +170,23 @@
         </table>
         <div class="my-4">{{ $programmes->links() }}</div>
     </x-tmk.section>
+
+    {{-- Modal for add a course --}}
+    <x-dialog-modal id="recordModal"
+                    wire:model.live="showModal">
+        <x-slot name="title">
+            <h1>IT Factory</h1>
+        </x-slot>
+        <x-slot name="content">
+            <h2>Courses</h2>
+
+            <h2>Add a course to the IT Factory programme</h2>
+            <h2>Name</h2>
+            <x-input wire:model="form.name"></x-input>
+        </x-slot>
+        <x-slot name="footer">
+            <x-button @click="$wire.from->create()">Create</x-button>
+            <x-secondary-button @click="$wire.showModal = false">Cancel</x-secondary-button>
+        </x-slot>
+    </x-dialog-modal>
 </div>
