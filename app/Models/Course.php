@@ -40,6 +40,6 @@ class Course extends Model
         );
     }
 
-
+    protected $fillable = ['name','programme_id','created_at','description'];
     protected $appends = ['programme_name','student_id','student_name'];
 }

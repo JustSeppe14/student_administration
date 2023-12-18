@@ -175,9 +175,7 @@
     <x-dialog-modal id="recordModal"
                     wire:model.live="showModal">
         <x-slot name="title">
-            <h1 class="border-b w-full">IT Factory</h1>
-
-            <h2>Courses</h2>
+            <h2>IT Factory</h2>
             @isset($selectedProgramme['course'])
                 <table class="w-full text-left align-top">
                     <thead>
@@ -191,18 +189,43 @@
                     @endforeach
                     </tbody>
                 </table>
-                @endisset
+            @endisset
             <h1 class="border-b">Add a course to the IT Factory programme</h1>
         </x-slot>
         <x-slot name="content">
-
-
-            <h2>Name</h2>
-            <x-input wire:model="form.name"></x-input>
+            {{-- error messages --}}
+            @if ($errors->any())
+                <x-tmk.alert type="danger">
+                    <x-tmk.list>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </x-tmk.list>
+                </x-tmk.alert>
+            @endif
+            {{-- show only if $form->id is empty --}}
+            <div class="flex flex-row gap-4 mt-4">
+                <div class="flex-1 flex-col gap-2">
+                    <x-label for="name" value="Name" class="mt-4"/>
+                    <x-input id="name" type="text"
+                             wire:model="form.name"
+                             class="mt-1 block w-full"/>
+                    <x-label for="description" value="Description" class="mt-4"/>
+                    <x-input id="description" type="text"
+                             wire:model="form.description"
+                             class="mt-1 block w-full"/>
+                </div>
+            </div>
         </x-slot>
         <x-slot name="footer">
-            <x-button @click="$wire.from->create()">Create</x-button>
             <x-secondary-button @click="$wire.showModal = false">Cancel</x-secondary-button>
+            <x-tmk.form.button color="success"
+                               wire:click="createCourse()"
+                               class="ml-2">Add new course
+            </x-tmk.form.button>
         </x-slot>
     </x-dialog-modal>
+
+
+
 </div>

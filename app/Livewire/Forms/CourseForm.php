@@ -13,10 +13,12 @@ class CourseForm extends Form
     public $name = null;
     #[Validate('required', as: 'description of the course')]
     public $description = null;
-    #[Validate('required', as: 'created at')]
+
     public $created_at = null;
     #[Validate('required|exists:programmes,id', as: 'programme')]
     public $programme_id = null;
+
+
 
     // read the selected record
     public function read($course)
@@ -36,8 +38,13 @@ class CourseForm extends Form
             'name' => $this->name,
             'description' => $this->description,
             'programme_id' => $this->programme_id,
-            'created_at' => $this->created_at,
+            'created_at' => $this->created_at.now(),
         ]);
     }
+
+
+
+
+
 
 }

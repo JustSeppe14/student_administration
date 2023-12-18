@@ -32,13 +32,14 @@ class Programmes extends Component
         $this->resetErrorBag();
         $this->showModal = true;
     }
+
     public function createCourse()
     {
         $this->form->create();
         $this->showModal = false;
         $this->dispatch('swal:toast', [
             'background'=>'success',
-            'html'=>"The course <b><i>{$this->form->name}</i></b> has been added",
+            'html'=>"The course <b><i>{$this->form->name}</i></b> has been added to the <b><i>{$this->selectedProgramme}</i></b>",
         ]);
     }
 
@@ -127,20 +128,7 @@ class Programmes extends Component
             'html' => "The genre <b><i>{$programme->name}</i></b> has been deleted",
         ]);
     }
-    public function showCourses(Programme $programme)
-    {
-        $this->selectedProgramme = $programme;
-        $courses = Course::where('programme_id', $programme->id)->with('programme')->get();
 
-        // If you want to associate courses directly with the programme, assuming 'course' is the relation
-//        dump($courses->toArray());
-        $this->selectedProgramme['course'] = $courses;
-
-        // If 'course' is a property, assign the courses to it
-        // $this->selectedProgramme->course = $courses;
-
-        $this->showModal = true;
-    }
 
 
 
