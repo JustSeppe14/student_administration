@@ -26,7 +26,7 @@ Route::middleware(['auth','active'])->prefix('admin')->name('admin.')->group(fun
 });
 
 Route::middleware(['guest'])->group(function (){
-    Route::redirect('/','/course');
+    Route::redirect('/course','/course');
     Route::get('course', CoursesOverview::class)->name('course');
 });
 

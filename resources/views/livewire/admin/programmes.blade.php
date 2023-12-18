@@ -141,7 +141,7 @@
                                     wire:click="edit({{$programme->id}})"
                                     class="w-5 text-gray-300 hover:text-green-600"/>
                                 <x-phosphor-book
-                                    wire:click="newCourse()"
+                                    wire:click="newCourse({{$programme->id}})"
                                     class="w-5 text-gray-300 hover:text-gray-600"/>
                                 <x-phosphor-trash-duotone
                                     @click="$dispatch('swal:confirm', {
@@ -175,12 +175,28 @@
     <x-dialog-modal id="recordModal"
                     wire:model.live="showModal">
         <x-slot name="title">
-            <h1>IT Factory</h1>
+            <h1 class="border-b w-full">IT Factory</h1>
+
+            <h2>Courses</h2>
+            @isset($selectedProgramme['course'])
+                <table class="w-full text-left align-top">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    @foreach($selectedProgramme['course'] as $programme)
+                        <tr>
+                            <td>{{ $programme->name}}
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                @endisset
+            <h1 class="border-b">Add a course to the IT Factory programme</h1>
         </x-slot>
         <x-slot name="content">
-            <h2>Courses</h2>
 
-            <h2>Add a course to the IT Factory programme</h2>
+
             <h2>Name</h2>
             <x-input wire:model="form.name"></x-input>
         </x-slot>

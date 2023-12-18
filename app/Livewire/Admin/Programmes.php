@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Course;
 use App\Models\programme;
+use App\Models\StudentCourses;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
@@ -17,12 +19,15 @@ class Programmes extends Component
     //sort properties
     public $orderBy = 'name';
     public $orderAsc = true;
-
+    public $selectedProgramme;
     public $showModal = false;
     public CourseForm $form;
 
-    public function newCourse()
+    public function newCourse(Programme $programme)
     {
+        $this->selectedProgramme = $programme;
+        $courses = Course::where('programme_id', $programme->id)->with('programme')->get();
+        $this->selectedProgramme['course'] = $courses;
         $this->form->reset();
         $this->resetErrorBag();
         $this->showModal = true;
@@ -122,6 +127,21 @@ class Programmes extends Component
             'html' => "The genre <b><i>{$programme->name}</i></b> has been deleted",
         ]);
     }
+    public function showCourses(Programme $programme)
+    {
+        $this->selectedProgramme = $programme;
+        $courses = Course::where('programme_id', $programme->id)->with('programme')->get();
+
+        // If you want to associate courses directly with the programme, assuming 'course' is the relation
+//        dump($courses->toArray());
+        $this->selectedProgramme['course'] = $courses;
+
+        // If 'course' is a property, assign the courses to it
+        // $this->selectedProgramme->course = $courses;
+
+        $this->showModal = true;
+    }
+
 
 
     #[Layout('layouts.studentadministration', ['title' => 'Programmes', 'description' => 'Manage the programmes of your courses',])]
@@ -130,8 +150,7 @@ class Programmes extends Component
         $programmes = programme::withCount('courses')
             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
             -> paginate($this->perPage);
-        $programme = Programme::orderBy('name')->get();
-        return view('livewire.admin.programmes',compact('programmes','programme'));
+        return view('livewire.admin.programmes',compact('programmes'));
     }
     public function resort($column)
     {
