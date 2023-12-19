@@ -140,6 +140,9 @@
                                 <x-phosphor-pencil-line-duotone
                                     wire:click="edit({{$programme->id}})"
                                     class="w-5 text-gray-300 hover:text-green-600"/>
+                                <x-phosphor-book
+                                    wire:click="newCourse({{$programme->id}})"
+                                    class="w-5 text-gray-300 hover:text-gray-600"/>
                                 <x-phosphor-trash-duotone
                                     @click="$dispatch('swal:confirm', {
                                         title: 'Delete {{ $programme->name }}?',
@@ -167,5 +170,63 @@
         </table>
         <div class="my-4">{{ $programmes->links() }}</div>
     </x-tmk.section>
+
+    {{-- Modal for add a course --}}
+    <x-dialog-modal id="recordModal"
+                    wire:model.live="showModal">
+        <x-slot name="title">
+            <h2>IT Factory</h2>
+            @isset($selectedProgramme['course'])
+                <table class="w-full text-left align-top">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    @foreach($selectedProgramme['course'] as $programme)
+                        <tr>
+                            <td>{{ $programme->name}}
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @endisset
+            <h1 class="border-b">Add a course to the IT Factory programme</h1>
+        </x-slot>
+        <x-slot name="content">
+            {{-- error messages --}}
+            @if ($errors->any())
+                <x-tmk.alert type="danger">
+                    <x-tmk.list>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </x-tmk.list>
+                </x-tmk.alert>
+            @endif
+            {{-- show only if $form->id is empty --}}
+            <div class="flex flex-row gap-4 mt-4">
+                <div class="flex-1 flex-col gap-2">
+                    <x-label for="name" value="Name" class="mt-4"/>
+                    <x-input id="name" type="text"
+                             wire:model="form.name"
+                             class="mt-1 block w-full"/>
+                    <x-label for="description" value="Description" class="mt-4"/>
+                    <x-input id="description" type="text"
+                             wire:model="form.description"
+                             class="mt-1 block w-full"/>
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-secondary-button @click="$wire.showModal = false">Cancel</x-secondary-button>
+            <x-tmk.form.button color="success"
+                               wire:click="createCourse()"
+                               class="ml-2">Add new course
+            </x-tmk.form.button>
+        </x-slot>
+    </x-dialog-modal>
+
+
+
 </div>
 

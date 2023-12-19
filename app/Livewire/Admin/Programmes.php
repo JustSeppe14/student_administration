@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Course;
 use App\Models\programme;
+use App\Models\StudentCourses;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Forms\CourseForm;
 
 class Programmes extends Component
 {
@@ -16,6 +19,29 @@ class Programmes extends Component
     //sort properties
     public $orderBy = 'name';
     public $orderAsc = true;
+    public $selectedProgramme;
+    public $showModal = false;
+    public CourseForm $form;
+
+    public function newCourse(Programme $programme)
+    {
+        $this->selectedProgramme = $programme;
+        $courses = Course::where('programme_id', $programme->id)->with('programme')->get();
+        $this->selectedProgramme['course'] = $courses;
+        $this->form->reset();
+        $this->resetErrorBag();
+        $this->showModal = true;
+    }
+
+    public function createCourse()
+    {
+        $this->form->create();
+        $this->showModal = false;
+        $this->dispatch('swal:toast', [
+            'background'=>'success',
+            'html'=>"The course <b><i>{$this->form->name}</i></b> has been added to the <b><i>{$this->selectedProgramme}</i></b>",
+        ]);
+    }
 
     public function updated($property, $value)
     {
@@ -102,6 +128,8 @@ class Programmes extends Component
             'html' => "The genre <b><i>{$programme->name}</i></b> has been deleted",
         ]);
     }
+
+
 
 
     #[Layout('layouts.studentadministration', ['title' => 'Programmes', 'description' => 'Manage the programmes of your courses',])]
