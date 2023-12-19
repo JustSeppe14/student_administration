@@ -35,12 +35,14 @@ class Programmes extends Component
 
     public function createCourse()
     {
+        $this->form->programme_id = $this->selectedProgramme['id'];
         $this->form->create();
-        $this->showModal = false;
         $this->dispatch('swal:toast', [
             'background'=>'success',
-            'html'=>"The course <b><i>{$this->form->name}</i></b> has been added to the <b><i>{$this->selectedProgramme}</i></b>",
+            'html'=>"The course <b><i>{$this->form->name}</i></b> has been added to the <b><i>{$this->selectedProgramme['name']}</i></b>",
         ]);
+        $this->form->reset();
+
     }
 
     public function updated($property, $value)

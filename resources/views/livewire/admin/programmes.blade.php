@@ -172,13 +172,14 @@
     </x-tmk.section>
 
     {{-- Modal for add a course --}}
-    <x-dialog-modal id="recordModal"
-                    wire:model.live="showModal">
+    <x-dialog-modal id="courseModal"
+                    wire:model="showModal">
         <x-slot name="title">
-            <h2>IT Factory</h2>
-            @isset($selectedProgramme['course'])
+            @isset($selectedProgramme)
+            <h2>{{$selectedProgramme['name']}}</h2>
                 <table class="w-full text-left align-top">
                     <thead>
+                    <p>Courses</p>
                     </thead>
                     <tbody>
                     @foreach($selectedProgramme['course'] as $programme)
@@ -203,13 +204,14 @@
                     </x-tmk.list>
                 </x-tmk.alert>
             @endif
-            {{-- show only if $form->id is empty --}}
+
             <div class="flex flex-row gap-4 mt-4">
                 <div class="flex-1 flex-col gap-2">
                     <x-label for="name" value="Name" class="mt-4"/>
                     <x-input id="name" type="text"
                              wire:model="form.name"
                              class="mt-1 block w-full"/>
+
                     <x-label for="description" value="Description" class="mt-4"/>
                     <x-input id="description" type="text"
                              wire:model="form.description"
