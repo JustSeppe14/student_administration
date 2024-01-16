@@ -1,4 +1,10 @@
 <div>
+    <div class="fixed top-8 left-1/2 -translate-x-1/2 z-50"
+         wire:loading>
+        <x-tmk.preloader class="bg-green-500/60 text-white border border-lime-700 shadow-2xl">
+            {{ $loading }}
+        </x-tmk.preloader>
+    </div>
     <x-tmk.section
         x-data="{open: false}"
         class="p-0 mb-4 flex flex-col gap-2">
@@ -176,15 +182,16 @@
                     wire:model="showModal">
         <x-slot name="title">
             @isset($selectedProgramme)
-            <h2>{{$selectedProgramme['name']}}</h2>
+                <h2>{{$selectedProgramme['name']}}</h2>
                 <table class="w-full text-left align-top">
                     <thead>
                     <p>Courses</p>
                     </thead>
                     <tbody>
-                    @foreach($selectedProgramme['course'] as $programme)
+                    @foreach($selectedProgramme['courses'] as $programme)
                         <tr>
-                            <td>{{ $programme->name}}
+                            <td>
+                                {{ $programme->name}}
                             </td>
                         </tr>
                     @endforeach
@@ -227,7 +234,6 @@
             </x-tmk.form.button>
         </x-slot>
     </x-dialog-modal>
-
 
 
 </div>

@@ -19,13 +19,14 @@
                          class="block mt-1 w-full"
                          placeholder="Filter on course name or description"/>
                 <button
+                    @click="$wire.set('name','')"
                         class="w-5 absolute right-4 top-3">
                     <x-phosphor-x/>
                 </button>
             </div>
         </div>
         <div>
-            <x-label for="genre" value="Genre"/>
+            <x-label for="programme" value="Programme"/>
             <x-tmk.form.select id="programme"
                                wire:model.live="programme"
                                class="block mt-1 w-full">
@@ -88,9 +89,15 @@
     <div class="my-4">{{ $courses->links() }}</div>
     {{-- No records found --}}
     @if($courses->isEmpty())
-        <x-tmk.alert type="danger" class="w-full">
-            Can't find any course with <b>'{{ $name }}'</b> in the <b>'{{$programme->name ??''}}'</b> programme.
-        </x-tmk.alert>
+        @if($programme === '%')
+            <x-tmk.alert type="danger" class="w-full">
+                Can't find any course with <b>'{{ $name }}'</b> in any of the <b>programmes</b>.
+            </x-tmk.alert>
+        @else
+            <x-tmk.alert type="danger" class="w-full">
+                Can't find any course with <b>'{{ $name }}'</b> in the <b>'{{ $allProgrammes->where('id', $programme)->first()->name }}'</b> programme.
+            </x-tmk.alert>
+        @endif
     @endif
 
     {{-- Detail section --}}

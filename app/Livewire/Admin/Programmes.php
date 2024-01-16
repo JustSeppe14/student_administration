@@ -22,6 +22,7 @@ class Programmes extends Component
     public $selectedProgramme;
     public $showModal = false;
     public CourseForm $form;
+    public $loading = 'Loading programmes...';
 
     public function newCourse(Programme $programme)
     {
